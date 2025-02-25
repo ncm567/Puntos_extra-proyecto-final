@@ -1,0 +1,5 @@
+Título de la actividad: Puntos extra- Proyecto Final del Curso
+
+Descripción del problema: 
+
+Realizar una cotización con el ejercicio anterior que pide que se requiera, con lo nuevo que se pide, Lo que se requiere es realizar cotizaciones de seguros para el asegurado, permitiendo múltiples cotizaciones hasta que el usuario decida salir, se tiene que usar la variable while, La cotización base se ajusta con recargos adicionales: un 35% por cada propiedad del asegurado y un 5% del salario del asegurado. El programa debe solicitar los datos necesarios y calcular la cotización final considerando los recargos anteriormente.
