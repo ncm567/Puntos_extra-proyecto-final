@@ -1,0 +1,105 @@
+//noprotec
+// Variables Útiles
+//Cotizador
+var precio_base = 2000; // Precio base de la cotización, en quetzales.
+
+// Valores de los recargos
+var edad_18 = 0.1; // 10%
+var edad_25 = 0.2; // 20%
+var edad_50 = 0.3; // 30%
+var casado_18 = 0.1; // 10%
+var casado_25 = 0.2; // 20%
+var casado_50 = 0.3; // 30%
+var hijos_recargo = 0.2; // 20%
+var propiedad_recargo = 0.35; // 35%
+var salario_recargo = 0.05; // 5%
+
+// Función principal para solicitar cotizaciones
+function solicitarCotizaciones() {
+    var nombre, edad, casado, edad_conyuge, hijos, cantidad_hijos, propiedades, cantidad_propiedades, salario;
+    var recargo, recargo_total, precio_final;
+
+    while (true) {
+        nombre = prompt("Ingrese su nombre, por favor (o 'Salir' para terminar)");
+        if (nombre.toLowerCase() === "salir") {
+            break;
+        }
+
+        edad = prompt("¿Cuántos años tiene? Ingrese solamente números");
+        casado = prompt("¿Está casado actualmente? (si/no)");
+        if ("si" == casado.toLowerCase()) {
+            edad_conyuge = prompt("¿Qué edad tiene su esposo/a? Ingrese solamente números");
+        }
+        hijos = prompt("¿Tiene hijos o hijas? (si/no)");
+        if ("si" == hijos.toLowerCase()) {
+            cantidad_hijos = prompt("¿Cuántos hijos tiene? Ingrese solamente números");
+            cantidad_hijos = parseInt(cantidad_hijos);
+        } else {
+            cantidad_hijos = 0;
+        }
+
+        propiedades = prompt("¿Tiene propiedades? (si/no)");
+        if ("si" == propiedades.toLowerCase()) {
+            cantidad_propiedades = prompt("¿Cuántas propiedades tiene? Ingrese solamente números");
+            cantidad_propiedades = parseInt(cantidad_propiedades);
+        } else {
+            cantidad_propiedades = 0;
+        }
+
+        salario = prompt("¿Cuál es su salario mensual? Ingrese solamente números");
+        salario = parseInt(salario);
+
+        // Convirtiendo las edades ingresadas a números
+        var edad_numero = parseInt(edad);
+        var edad_conyuge_numero = 0;
+
+        // Convirtiendo la edad del cónyuge si se está casado/a
+        if ("si" == casado.toLowerCase()) {
+            edad_conyuge_numero = parseInt(edad_conyuge);
+        }
+
+        // Inicializar recargos
+        recargo_total = 0;
+
+        // Calcular recargos
+        // Recargo por edad del asegurado
+        if (edad_numero >= 18 && edad_numero < 25) {
+            recargo_total += precio_base * edad_18;
+        } else if (edad_numero >= 25 && edad_numero < 50) {
+            recargo_total += precio_base * edad_25;
+        } else if (edad_numero >= 50) {
+            recargo_total += precio_base * edad_50;
+        }
+
+        // Recargo por la edad del cónyuge
+        if ("si" == casado.toLowerCase()) {
+            if (edad_conyuge_numero >= 18 && edad_conyuge_numero < 25) {
+                recargo_total += precio_base * casado_18;
+            } else if (edad_conyuge_numero >= 25 && edad_conyuge_numero < 50) {
+                recargo_total += precio_base * casado_25;
+            } else if (edad_conyuge_numero >= 50) {
+                recargo_total += precio_base * casado_50;
+            }
+        }
+
+        // Recargo por la cantidad de hijos
+        recargo_total += precio_base * hijos_recargo * cantidad_hijos;
+
+        // Recargo por propiedades
+        recargo_total += precio_base * propiedad_recargo * cantidad_propiedades;
+
+        // Recargo por salario
+        recargo_total += salario * salario_recargo;
+
+        // Calcular el precio final
+        precio_final = precio_base + recargo_total;
+
+        // Resultados
+        alert("Para el asegurado " + nombre);
+        alert("El recargo total será de: Q." + recargo_total);
+        alert("El precio final de la cotización será de: Q." + precio_final);
+    }
+}
+
+// Llamar a la función para iniciar el programa
+solicitarCotizaciones();
